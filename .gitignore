@@ -4,3 +4,4 @@ dist
 dist-electron
 npm-install.log
 release
+docs/*.png
