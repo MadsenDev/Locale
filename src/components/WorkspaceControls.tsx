@@ -4,20 +4,28 @@ import { FiFolder, FiFileText, FiRefreshCcw, FiDownload } from 'react-icons/fi';
 interface Props {
   projectPath: string;
   languagePath: string;
+  extensionInput: string;
+  ignoreInput: string;
   onChooseProject: () => void;
   onChooseLanguage: () => void;
   onScan: () => void;
   onSave: () => void;
+  onExtensionChange: (value: string) => void;
+  onIgnoreChange: (value: string) => void;
   disabled?: boolean;
 }
 
 export function WorkspaceControls({
   projectPath,
   languagePath,
+  extensionInput,
+  ignoreInput,
   onChooseProject,
   onChooseLanguage,
   onScan,
   onSave,
+  onExtensionChange,
+  onIgnoreChange,
   disabled,
 }: Props) {
   return (
@@ -26,8 +34,8 @@ export function WorkspaceControls({
       animate={{ opacity: 1, y: 0 }}
       className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-lg"
     >
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col gap-3 md:w-2/3">
           <button
             onClick={onChooseProject}
             className="group flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-800/40 px-4 py-3 text-left transition hover:border-emerald-500/60"
@@ -57,6 +65,30 @@ export function WorkspaceControls({
               </p>
             </div>
           </button>
+
+          <div className="grid gap-3 md:grid-cols-2">
+            <label className="flex flex-col gap-2 rounded-xl border border-slate-800 bg-slate-800/30 px-4 py-3">
+              <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">Extensions</span>
+              <input
+                value={extensionInput}
+                onChange={(e) => onExtensionChange(e.target.value)}
+                placeholder=".js,.jsx,.ts,.tsx"
+                className="rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 text-sm text-white outline-none focus:border-emerald-500"
+              />
+              <span className="text-xs text-slate-400">Comma-separated list of file extensions to scan.</span>
+            </label>
+
+            <label className="flex flex-col gap-2 rounded-xl border border-slate-800 bg-slate-800/30 px-4 py-3">
+              <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">Ignore patterns</span>
+              <input
+                value={ignoreInput}
+                onChange={(e) => onIgnoreChange(e.target.value)}
+                placeholder="node_modules,dist,.git"
+                className="rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 text-sm text-white outline-none focus:border-blue-500"
+              />
+              <span className="text-xs text-slate-400">Directories or glob patterns to exclude from scans.</span>
+            </label>
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-3">
