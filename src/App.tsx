@@ -19,6 +19,8 @@ export default function App() {
   const [filter, setFilter] = useState('');
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState('');
+  const [extensionInput, setExtensionInput] = useState('.tsx,.jsx,.ts,.js');
+  const [ignoreInput, setIgnoreInput] = useState('node_modules,dist,build');
 
   const languageKeys = useMemo(() => flattenLanguageKeys(languageData), [languageData]);
 
@@ -67,10 +69,20 @@ export default function App() {
     if (!projectPath) return;
     setLoading(true);
     try {
+      const extensions = extensionInput
+        .split(',')
+        .map((ext) => ext.trim())
+        .filter(Boolean)
+        .map((ext) => (ext.startsWith('.') ? ext : `.${ext}`));
+      const ignore = ignoreInput
+        .split(',')
+        .map((pattern) => pattern.trim())
+        .filter(Boolean);
+
       const { candidates } = await ipc.scanProject({
         rootPath: projectPath,
-        extensions: ['.tsx', '.jsx', '.ts', '.js'],
-        ignore: ['node_modules', 'dist', 'build'],
+        extensions,
+        ignore,
       });
 
       const withKeys = candidates.map((c) => ({
@@ -130,10 +142,14 @@ export default function App() {
         <WorkspaceControls
           projectPath={projectPath}
           languagePath={languagePath}
+          extensionInput={extensionInput}
+          ignoreInput={ignoreInput}
           onChooseProject={handleChooseProject}
           onChooseLanguage={handleChooseLanguage}
           onScan={handleScan}
           onSave={handleSave}
+          onExtensionChange={setExtensionInput}
+          onIgnoreChange={setIgnoreInput}
           disabled={loading}
         />
 
