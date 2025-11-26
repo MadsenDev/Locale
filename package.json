@@ -11,6 +11,7 @@
     "build:renderer": "vite build",
     "build:main": "tsc -p electron/tsconfig.json",
     "lint": "echo \"lint not configured\"",
+    "test": "vitest run",
     "start": "electron dist-electron/main.js",
     "pack": "npm run build && electron-builder build --dir",
     "dist": "npm run build && electron-builder"
@@ -27,6 +28,9 @@
     "react-icons": "^5.2.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/babel__traverse": "^7.20.6",
     "@types/lodash": "^4.17.7",
     "@types/node": "^20.12.12",
@@ -37,11 +41,13 @@
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
     "electron-builder": "^24.13.3",
+    "jsdom": "^27.2.0",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.10",
+    "vitest": "^4.0.14",
     "wait-on": "^7.2.0"
   },
   "build": {
