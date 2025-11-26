@@ -4,20 +4,24 @@ import { FiCheck, FiAlertTriangle, FiFilePlus } from 'react-icons/fi';
 interface Props {
   total: number;
   selected: number;
+  newKeys: number;
   existing: number;
+  obsolete: number;
 }
 
 const cards = [
-  { key: 'total', label: 'Detected', icon: FiFilePlus, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
-  { key: 'selected', label: 'Chosen', icon: FiCheck, color: 'text-blue-300', bg: 'bg-blue-500/10' },
+  { key: 'total', label: 'Detected strings', icon: FiFilePlus, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
+  { key: 'selected', label: 'Selected', icon: FiCheck, color: 'text-blue-300', bg: 'bg-blue-500/10' },
+  { key: 'newKeys', label: 'New keys', icon: FiFilePlus, color: 'text-emerald-300', bg: 'bg-emerald-500/10' },
   { key: 'existing', label: 'Existing keys', icon: FiAlertTriangle, color: 'text-amber-300', bg: 'bg-amber-500/10' },
+  { key: 'obsolete', label: 'Obsolete keys', icon: FiAlertTriangle, color: 'text-rose-300', bg: 'bg-rose-500/10' },
 ] as const;
 
-export function SummaryCards({ total, selected, existing }: Props) {
-  const values: Record<string, number> = { total, selected, existing };
+export function SummaryCards({ total, selected, newKeys, existing, obsolete }: Props) {
+  const values: Record<string, number> = { total, selected, newKeys, existing, obsolete };
 
   return (
-    <div className="grid gap-3 md:grid-cols-3">
+    <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-5">
       {cards.map(({ key, label, icon: Icon, color, bg }) => (
         <motion.div
           key={key}

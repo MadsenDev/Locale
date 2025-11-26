@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiZap, FiKey, FiSave } from 'react-icons/fi';
+import { FiZap, FiKey, FiSave, FiCheckSquare, FiSquare } from 'react-icons/fi';
 import type { CandidateString } from './types';
-import { suggestKey, nestKey } from './utils/keygen';
+import { suggestKey, nestKey, flattenLanguageKeys } from './utils/keygen';
 import { TopBar } from './components/TopBar';
 import { WorkspaceControls } from './components/WorkspaceControls';
 import { CandidateTable } from './components/CandidateTable';
@@ -10,19 +10,6 @@ import { SummaryCards } from './components/SummaryCards';
 import { LanguagePreview } from './components/LanguagePreview';
 
 const ipc = window.api;
-
-function hasNestedKey(obj: any, key: string) {
-  const parts = key.split('.');
-  let current = obj;
-  for (const part of parts) {
-    if (current && Object.prototype.hasOwnProperty.call(current, part)) {
-      current = current[part];
-    } else {
-      return false;
-    }
-  }
-  return true;
-}
 
 export default function App() {
   const [projectPath, setProjectPath] = useState('');
@@ -33,15 +20,23 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState('');
 
+  const languageKeys = useMemo(() => flattenLanguageKeys(languageData), [languageData]);
+
   const stats = useMemo(() => {
-    const selected = candidates.filter((c) => c.include !== false);
-    const existing = selected.filter((c) => c.keySuggestion && hasNestedKey(languageData, c.keySuggestion)).length;
+    const selected = candidates.filter((c) => c.include !== false && c.keySuggestion);
+    const selectedKeys = new Set(selected.map((c) => c.keySuggestion!));
+    const existing = selected.filter((c) => c.keySuggestion && languageKeys.has(c.keySuggestion)).length;
+    const newKeys = Math.max(0, selected.length - existing);
+    const obsolete = selected.length === 0 ? 0 : [...languageKeys].filter((key) => !selectedKeys.has(key)).length;
+
     return {
       total: candidates.length,
       selected: selected.length,
+      newKeys,
       existing,
+      obsolete,
     };
-  }, [candidates, languageData]);
+  }, [candidates, languageKeys]);
 
   const loadLanguage = async (path: string) => {
     try {
@@ -106,6 +101,14 @@ export default function App() {
     );
   };
 
+  const selectAll = () => {
+    setCandidates((prev) => prev.map((c) => ({ ...c, include: true })));
+  };
+
+  const deselectAll = () => {
+    setCandidates((prev) => prev.map((c) => ({ ...c, include: false })));
+  };
+
   const applyToBase = () => {
     const updated = { ...languageData };
     candidates
@@ -134,7 +137,13 @@ export default function App() {
           disabled={loading}
         />
 
-        <SummaryCards total={stats.total} selected={stats.selected} existing={stats.existing} />
+        <SummaryCards
+          total={stats.total}
+          selected={stats.selected}
+          newKeys={stats.newKeys}
+          existing={stats.existing}
+          obsolete={stats.obsolete}
+        />
 
         <AnimatePresence>
           <motion.div
@@ -164,6 +173,22 @@ export default function App() {
               >
                 <p className="mb-3 text-sm font-semibold text-white">Bulk actions</p>
                 <div className="flex flex-col gap-2">
+                  <div className="flex gap-2">
+                    <button
+                      onClick={selectAll}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-slate-800 bg-slate-800/60 px-3 py-2 text-sm font-semibold text-white transition hover:border-slate-700"
+                    >
+                      <FiCheckSquare className="h-4 w-4" />
+                      Select all
+                    </button>
+                    <button
+                      onClick={deselectAll}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-slate-800 bg-slate-800/60 px-3 py-2 text-sm font-semibold text-white transition hover:border-slate-700"
+                    >
+                      <FiSquare className="h-4 w-4" />
+                      Deselect all
+                    </button>
+                  </div>
                   <button
                     onClick={regenerateKeys}
                     className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-800/60 px-3 py-2 text-sm font-semibold text-white transition hover:border-slate-700"
