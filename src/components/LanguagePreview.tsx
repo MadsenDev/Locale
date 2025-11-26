@@ -5,16 +5,20 @@ interface Props {
   path: string;
   jsonPreview: string;
   onReveal: () => void;
+  className?: string;
 }
 
-export function LanguagePreview({ path, jsonPreview, onReveal }: Props) {
+export function LanguagePreview({ path, jsonPreview, onReveal, className }: Props) {
+  const sectionClass = [
+    'flex min-h-[240px] flex-col rounded-2xl border border-slate-800 bg-slate-900/70 p-4',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4"
-    >
-      <div className="mb-2 flex items-center justify-between">
+    <motion.section initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className={sectionClass}>
+      <div className="mb-2 flex items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-slate-200">
           <FiFileText className="h-5 w-5 text-blue-300" />
           <div>
@@ -32,7 +36,7 @@ export function LanguagePreview({ path, jsonPreview, onReveal }: Props) {
           </button>
         )}
       </div>
-      <pre className="max-h-48 overflow-auto rounded-xl border border-slate-800 bg-slate-950/70 p-3 text-xs text-emerald-100">
+      <pre className="flex-1 min-h-[160px] overflow-auto rounded-xl border border-slate-800 bg-slate-950/70 p-3 text-xs text-emerald-100">
         {jsonPreview || '// Preview will appear after loading'}
       </pre>
     </motion.section>

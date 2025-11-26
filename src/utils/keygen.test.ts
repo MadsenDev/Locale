@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { flattenLanguageKeys, nestKey, suggestKey } from './keygen';
+import { flattenLanguageKeys, nestKey, namespaceFromFile, suggestKey } from './keygen';
 
 describe('suggestKey', () => {
   it('creates a slugified key within namespace', () => {
@@ -15,6 +15,26 @@ describe('suggestKey', () => {
 
     expect(result).toBe('ui.text_1704067200000');
     vi.useRealTimers();
+  });
+
+  it('limits slug to six words and appends a hash when text is longer', () => {
+    const result = suggestKey(
+      'Jump start your stack with curated dependencies scripts and sample code preferences you can still tweak anything',
+      'ui'
+    );
+    expect(result).toMatch(/^ui\.jump_start_your_stack_with_curated_[a-z0-9]{4}$/);
+  });
+});
+
+describe('namespaceFromFile', () => {
+  it('derives a namespace from the containing filename', () => {
+    const namespace = namespaceFromFile('components/forms/SignupForm.tsx');
+    expect(namespace).toBe('signup_form');
+  });
+
+  it('falls back to provided default when nothing usable exists', () => {
+    const namespace = namespaceFromFile('', 'ui');
+    expect(namespace).toBe('ui');
   });
 });
 

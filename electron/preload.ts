@@ -5,6 +5,15 @@ const api: LocaleForgeAPI = {
   async openProject() {
     return ipcRenderer.invoke('project:select');
   },
+  async openLanguageDirectory() {
+    return ipcRenderer.invoke('lang:select-dir');
+  },
+  async listLanguageFiles(payload) {
+    return ipcRenderer.invoke('lang:list', payload);
+  },
+  async createLanguageFile(payload) {
+    return ipcRenderer.invoke('lang:create', payload);
+  },
   async openLanguageFile() {
     return ipcRenderer.invoke('lang:select');
   },

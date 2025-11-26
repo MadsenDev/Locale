@@ -8,6 +8,7 @@ interface Props {
   onToggle: (id: string, include: boolean) => void;
   filter: string;
   onFilterChange: (value: string) => void;
+  className?: string;
 }
 
 export function CandidateTable({
@@ -16,6 +17,7 @@ export function CandidateTable({
   onToggle,
   filter,
   onFilterChange,
+  className,
 }: Props) {
   const filtered = candidates.filter((item) =>
     `${item.text} ${item.file} ${item.keySuggestion}`
@@ -23,11 +25,18 @@ export function CandidateTable({
       .includes(filter.toLowerCase())
   );
 
+  const sectionClass = [
+    'flex h-full min-h-0 flex-col rounded-2xl border border-slate-800 bg-slate-900/60 p-4 shadow-inner',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 shadow-inner"
+      className={sectionClass}
     >
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 text-slate-300">
@@ -45,14 +54,14 @@ export function CandidateTable({
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-slate-800">
+      <div className="mt-2 flex-1 min-h-0 overflow-hidden rounded-xl border border-slate-800">
         <div className="grid grid-cols-12 bg-slate-800/80 px-3 py-2 text-xs uppercase tracking-wide text-slate-400">
           <div className="col-span-4">Text</div>
           <div className="col-span-3">File</div>
           <div className="col-span-3">Suggested key</div>
           <div className="col-span-2 text-right">Include</div>
         </div>
-        <div className="divide-y divide-slate-800">
+        <div className="divide-y divide-slate-800 overflow-auto max-h-full pr-1 pb-20">
           {filtered.map((item) => (
             <div
               key={item.id}

@@ -6,9 +6,7 @@ import { scanProject } from './scanner';
 const isDev = !app.isPackaged;
 
 async function createWindow() {
-  const preloadPath = isDev
-    ? path.join(__dirname, 'preload.ts')
-    : path.join(__dirname, 'preload.js');
+  const preloadPath = path.join(__dirname, 'preload.js');
 
   const win = new BrowserWindow({
     width: 1200,
@@ -60,6 +58,39 @@ ipcMain.handle('lang:select', async () => {
   });
   if (result.canceled || result.filePaths.length === 0) return null;
   return result.filePaths[0];
+});
+
+ipcMain.handle('lang:select-dir', async () => {
+  const result = await dialog.showOpenDialog({
+    properties: ['openDirectory', 'createDirectory'],
+  });
+  if (result.canceled || result.filePaths.length === 0) return null;
+  return result.filePaths[0];
+});
+
+ipcMain.handle('lang:list', async (_event, payload: { directory: string }) => {
+  const entries = await fs.readdir(payload.directory, { withFileTypes: true });
+  const files = entries
+    .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith('.json'))
+    .map((entry) => ({
+      name: entry.name,
+      path: path.join(payload.directory, entry.name),
+    }));
+  return { files };
+});
+
+ipcMain.handle('lang:create', async (_event, payload: { directory: string; code: string }) => {
+  const safeCode = payload.code.replace(/[^a-zA-Z0-9-_]/g, '').toLowerCase() || 'base';
+  const fileName = safeCode.endsWith('.json') ? safeCode : `${safeCode}.json`;
+  const targetPath = path.join(payload.directory, fileName);
+
+  try {
+    await fs.access(targetPath);
+  } catch {
+    await fs.writeFile(targetPath, JSON.stringify({}, null, 2), 'utf8');
+  }
+
+  return { path: targetPath };
 });
 
 ipcMain.handle('project:scan', async (_event, params) => {
