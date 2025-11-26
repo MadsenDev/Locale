@@ -14,3 +14,8 @@ export type LanguageEntry = {
   text: string;
   status: 'new' | 'existing';
 };
+
+export type KeyValuePair = {
+  key: string;
+  value: unknown;
+};

@@ -1,4 +1,5 @@
 import kebabCase from 'lodash/kebabCase';
+import type { KeyValuePair } from '../types';
 
 export function suggestKey(text: string, namespace = 'strings') {
   const cleaned = text
@@ -23,4 +24,23 @@ export function nestKey(key: string, value: string, target: Record<string, any>)
       current = current[part];
     }
   });
+}
+
+export function flattenLanguageKeys(source: Record<string, any>): Set<string> {
+  const entries: KeyValuePair[] = [{ key: '', value: source }];
+  const result = new Set<string>();
+
+  while (entries.length) {
+    const { key, value } = entries.pop()!;
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      Object.entries(value).forEach(([childKey, childValue]) => {
+        const nextKey = key ? `${key}.${childKey}` : childKey;
+        entries.push({ key: nextKey, value: childValue });
+      });
+    } else if (key) {
+      result.add(key);
+    }
+  }
+
+  return result;
 }

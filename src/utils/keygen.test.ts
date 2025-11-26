@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { nestKey, suggestKey } from './keygen';
+import { flattenLanguageKeys, nestKey, suggestKey } from './keygen';
 
 describe('suggestKey', () => {
   it('creates a slugified key within namespace', () => {
@@ -45,5 +45,18 @@ describe('nestKey', () => {
     nestKey('errors.form.required', 'New message', target);
 
     expect(target.errors.form.required).toBe('New message');
+  });
+});
+
+describe('flattenLanguageKeys', () => {
+  it('returns a flat set of dot-notated keys', () => {
+    const sample = {
+      buttons: { save: 'Save', cancel: 'Cancel' },
+      titles: { settings: 'Settings' },
+    };
+
+    const keys = flattenLanguageKeys(sample);
+
+    expect(keys).toEqual(new Set(['buttons.save', 'buttons.cancel', 'titles.settings']));
   });
 });
