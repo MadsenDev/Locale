@@ -1,6 +1,10 @@
 import { FiSettings, FiFolder } from 'react-icons/fi';
 
-export function TopBar() {
+interface Props {
+  onOpenSettings: () => void;
+}
+
+export function TopBar({ onOpenSettings }: Props) {
   return (
     <header className="flex items-center justify-between border-b border-slate-800 bg-slate-900/80 px-6 py-4 backdrop-blur">
       <div className="flex items-center gap-3 text-slate-100">
@@ -14,7 +18,9 @@ export function TopBar() {
       </div>
       <button
         type="button"
+        onClick={onOpenSettings}
         className="rounded-full border border-slate-800 bg-slate-800/50 p-2 text-slate-300 transition hover:border-slate-700 hover:text-white"
+        aria-label="Open settings"
       >
         <FiSettings className="h-5 w-5" />
       </button>

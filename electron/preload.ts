@@ -8,6 +8,12 @@ const api: LocaleForgeAPI = {
   async openLanguageDirectory() {
     return ipcRenderer.invoke('lang:select-dir');
   },
+  async listProjectFolders(payload) {
+    return ipcRenderer.invoke('project:list-folders', payload);
+  },
+  async autoDetectLanguageDirectory(payload) {
+    return ipcRenderer.invoke('lang:auto-detect', payload);
+  },
   async listLanguageFiles(payload) {
     return ipcRenderer.invoke('lang:list', payload);
   },
@@ -28,6 +34,25 @@ const api: LocaleForgeAPI = {
   },
   showItemInFolder(targetPath) {
     ipcRenderer.invoke('os:reveal', targetPath);
+  },
+  async getTranslationSettings() {
+    return ipcRenderer.invoke('translation:settings:get');
+  },
+  async saveTranslationSettings(value) {
+    return ipcRenderer.invoke('translation:settings:save', value);
+  },
+  async runTranslationSync(payload) {
+    return ipcRenderer.invoke('translation:sync', payload);
+  },
+  async listTranslationModels(payload) {
+    return ipcRenderer.invoke('translation:models:list', payload);
+  },
+  onTranslationProgress(callback) {
+    const listener = (_event, data) => callback(data);
+    ipcRenderer.on('translation:progress', listener);
+    return () => {
+      ipcRenderer.removeListener('translation:progress', listener);
+    };
   },
 };
 

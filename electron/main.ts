@@ -1,9 +1,11 @@
-import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron';
+import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import path from 'path';
-import fs from 'fs/promises';
-import { scanProject } from './scanner';
+import { registerProjectHandlers } from './ipc/projectHandlers';
+import { registerLanguageHandlers } from './ipc/languageHandlers';
+import { registerTranslationHandlers } from './ipc/translationHandlers';
 
 const isDev = !app.isPackaged;
+let mainWindow: BrowserWindow | null = null;
 
 async function createWindow() {
   const preloadPath = path.join(__dirname, 'preload.js');
@@ -19,6 +21,8 @@ async function createWindow() {
     },
   });
 
+  mainWindow = win;
+
   if (isDev) {
     const devUrl = process.env.VITE_DEV_SERVER_URL ?? 'http://localhost:5173';
     await win.loadURL(devUrl);
@@ -31,6 +35,9 @@ async function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
+  registerProjectHandlers();
+  registerLanguageHandlers();
+  registerTranslationHandlers(() => mainWindow, () => app.getPath('userData'));
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -45,69 +52,12 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.handle('project:select', async () => {
-  const result = await dialog.showOpenDialog({ properties: ['openDirectory'] });
-  if (result.canceled || result.filePaths.length === 0) return null;
-  return result.filePaths[0];
-});
-
-ipcMain.handle('lang:select', async () => {
-  const result = await dialog.showOpenDialog({
-    properties: ['openFile', 'createDirectory'],
-    filters: [{ name: 'JSON', extensions: ['json'] }],
+app.on('browser-window-created', (_, window) => {
+  window.on('closed', () => {
+    if (mainWindow === window) {
+      mainWindow = null;
+    }
   });
-  if (result.canceled || result.filePaths.length === 0) return null;
-  return result.filePaths[0];
-});
-
-ipcMain.handle('lang:select-dir', async () => {
-  const result = await dialog.showOpenDialog({
-    properties: ['openDirectory', 'createDirectory'],
-  });
-  if (result.canceled || result.filePaths.length === 0) return null;
-  return result.filePaths[0];
-});
-
-ipcMain.handle('lang:list', async (_event, payload: { directory: string }) => {
-  const entries = await fs.readdir(payload.directory, { withFileTypes: true });
-  const files = entries
-    .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith('.json'))
-    .map((entry) => ({
-      name: entry.name,
-      path: path.join(payload.directory, entry.name),
-    }));
-  return { files };
-});
-
-ipcMain.handle('lang:create', async (_event, payload: { directory: string; code: string }) => {
-  const safeCode = payload.code.replace(/[^a-zA-Z0-9-_]/g, '').toLowerCase() || 'base';
-  const fileName = safeCode.endsWith('.json') ? safeCode : `${safeCode}.json`;
-  const targetPath = path.join(payload.directory, fileName);
-
-  try {
-    await fs.access(targetPath);
-  } catch {
-    await fs.writeFile(targetPath, JSON.stringify({}, null, 2), 'utf8');
-  }
-
-  return { path: targetPath };
-});
-
-ipcMain.handle('project:scan', async (_event, params) => {
-  const { rootPath, extensions, ignore } = params;
-  const candidates = await scanProject(rootPath, extensions, ignore);
-  return { candidates };
-});
-
-ipcMain.handle('lang:load', async (_event, payload) => {
-  const raw = await fs.readFile(payload.path, 'utf8');
-  const data = JSON.parse(raw);
-  return { data };
-});
-
-ipcMain.handle('lang:save', async (_event, payload) => {
-  await fs.writeFile(payload.path, JSON.stringify(payload.data, null, 2), 'utf8');
-  return { success: true };
 });
 
 ipcMain.handle('os:reveal', (_event, targetPath: string) => {
