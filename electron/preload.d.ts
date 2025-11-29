@@ -1,6 +1,6 @@
 export interface LocaleForgeAPI {
   openProject(): Promise<string | null>;
-  openLanguageDirectory(): Promise<string | null>;
+  openLanguageDirectory(defaultPath?: string): Promise<string | null>;
   listProjectFolders(payload: { root: string; path?: string }): Promise<{ children: DirectoryNode[] }>;
   autoDetectLanguageDirectory(payload: { projectPath: string }): Promise<string | null>;
   listLanguageFiles(payload: { directory: string }): Promise<{ files: LanguageFileSummary[] }>;
@@ -12,6 +12,9 @@ export interface LocaleForgeAPI {
     ignore: string[];
     directories?: string[];
   }): Promise<{ candidates: CandidateString[] }>;
+  applyTranslationPatch(payload: TranslationPatchPayload): Promise<{ success: boolean; path: string }>;
+  checkDependency(payload: DependencyPayload): Promise<{ installed: boolean }>;
+  installDependency(payload: DependencyPayload): Promise<{ installed: boolean }>;
   loadLanguageFile(path: string): Promise<{ data: any }>;
   saveLanguageFile(payload: { path: string; data: any }): Promise<{ success: boolean }>;
   showItemInFolder(path: string): void;
@@ -20,6 +23,12 @@ export interface LocaleForgeAPI {
   runTranslationSync(payload: { basePath: string; languageDir: string }): Promise<TranslationSyncResult>;
   listTranslationModels(payload: { provider: TranslationSettings['provider']; apiKey: string; apiUrl?: string }): Promise<string[]>;
   onTranslationProgress(callback: (event: TranslationProgressEvent) => void): () => void;
+  getLaunchContext(): Promise<{ projectPath?: string }>;
+  window: {
+    minimize(): Promise<void>;
+    maximize(): Promise<void>;
+    close(): Promise<void>;
+  };
 }
 
 type CandidateString = {
@@ -29,6 +38,8 @@ type CandidateString = {
   line: number;
   column: number;
   context: string;
+  localized?: boolean;
+  keyPath?: string;
 };
 
 type LanguageFileSummary = {
@@ -71,6 +82,24 @@ type TranslationProgressEvent = {
   total?: number;
   message?: string;
   error?: string;
+};
+
+type TranslationPatchPayload = {
+  projectPath: string;
+  relativePath: string;
+  text: string;
+  line: number;
+  column: number;
+  key: string;
+  functionName: string;
+  importSource?: string;
+  importKind?: 'named' | 'default';
+  skipImport?: boolean;
+};
+
+type DependencyPayload = {
+  projectPath: string;
+  packageName: string;
 };
 
 declare global {

@@ -1,0 +1,95 @@
+{
+  "app": {
+    "localeforge": "LocaleForge",
+    "workspace": "Espace de travail",
+    "configure_what_to_scan_and_where_ic2c": "Configurez les éléments à analyser et l’emplacement des traductions.",
+    "candidates": "Candidats",
+    "detected_strings": "Chaînes détectées",
+    "bulk_actions": "Actions groupées",
+    "select_all": "Tout sélectionner",
+    "deselect_all": "Tout désélectionner",
+    "regenerate_keys": "Régénérer les clés",
+    "apply_selected_to_base": "Appliquer la sélection à la langue de base",
+    "save_language_file": "Enregistrer le fichier de langue",
+    "we_found_the_following_json_files_am41": "Nous avons trouvé les fichiers JSON suivants dans",
+    "cancel": "Annuler",
+    "use_file": "Utiliser le fichier",
+    "no_language_files_were_found_in": "Aucun fichier de langue n’a été trouvé dans",
+    "language": "Langue",
+    "custom_code": "Code personnalisé…",
+    "custom_locale_code": "Code de locale personnalisé",
+    "create_file": "Créer le fichier"
+  },
+  "candidate_table": {
+    "text": "Texte",
+    "file": "Fichier",
+    "suggested_key": "Clé suggérée",
+    "include": "Inclure",
+    "line": "Ligne",
+    "no_matches_yet_run_a_scan_60l6": "Aucune correspondance pour le moment. Lancez une analyse pour voir les candidats."
+  },
+  "language_preview": {
+    "base_language": "Langue de base",
+    "reveal_in_finder": "Afficher dans le Finder"
+  },
+  "top_bar": {
+    "localeforge": "LocaleForge",
+    "extract_ui_strings_craft_translation_keys": "Extraire les chaînes d’interface utilisateur et créer des clés de traduction"
+  },
+  "workspace_controls": {
+    "workspace": "Espace de travail",
+    "scan_settings": "Paramètres d’analyse",
+    "run_scan": "Lancer l’analyse",
+    "save_base_file": "Enregistrer le fichier de base"
+  },
+  "candidate_file_view": {
+    "no_matches_yet_run_a_scan_60l6": "Aucune correspondance pour le moment. Lancez une analyse pour voir les candidats.",
+    "string": "chaîne",
+    "line": "Ligne"
+  },
+  "candidate_views": {
+    "review_and_tweak_detected_strings": "Examiner et ajuster les chaînes détectées",
+    "hidden": "masqué"
+  },
+  "folder_selector_modal": {
+    "nodemodules": "node_modules",
+    "dist": "dist",
+    "etc": ", etc.",
+    "select_recommended": "Sélectionner les éléments recommandés",
+    "select_none": "Tout désélectionner",
+    "select_all_loaded": "Tout sélectionner parmi les éléments chargés",
+    "loading_folders": "Chargement des dossiers…",
+    "cancel": "Annuler",
+    "apply_selection": "Appliquer la sélection"
+  },
+  "translation_progress_modal": {
+    "waiting_for_updates": "En attente de mises à jour…"
+  },
+  "translation_settings_modal": {
+    "autotranslation": "Traduction automatique",
+    "bring_your_own_api_key_to_5ogn": "Utilisez votre propre clé API pour activer les traductions automatiques.",
+    "provider": "Fournisseur",
+    "api_key": "Clé API",
+    "model": "Modèle",
+    "loading_models": "Chargement des modèles…",
+    "target_locales": "Paramètres régionaux cibles",
+    "specify_which_locale_files_should_be_cta0": "Indiquez quels fichiers de paramètres régionaux doivent être synchronisés (par exemple,",
+    "es": "es",
+    "frca": "fr-CA",
+    "no_locales_added_yet": "Aucun paramètre régional ajouté pour le moment",
+    "add": "Ajouter"
+  },
+  "workspace_header": {
+    "active_project": "Projet actif",
+    "choose_folders_to_scan": "Choisir les dossiers à analyser",
+    "run_scan": "Lancer l'analyse",
+    "save_base_file": "Enregistrer le fichier de base",
+    "settings": "Paramètres",
+    "locale": "Paramètres régionaux",
+    "status": "Statut",
+    "translated_keys": "Clés traduites",
+    "updated": "Mis à jour",
+    "up_to_date": "À jour",
+    "error": "Erreur"
+  }
+}

@@ -14,9 +14,19 @@ export function registerLanguageHandlers() {
     return result.filePaths[0];
   });
 
-  ipcMain.handle('lang:select-dir', async () => {
+  ipcMain.handle('lang:select-dir', async (_event, payload?: { defaultPath?: string }) => {
+    let defaultPath = payload?.defaultPath;
+    if (defaultPath) {
+      try {
+        await fs.access(defaultPath);
+      } catch {
+        defaultPath = undefined;
+      }
+    }
+
     const result = await dialog.showOpenDialog({
       properties: ['openDirectory', 'createDirectory'],
+      defaultPath,
     });
     if (result.canceled || result.filePaths.length === 0) return null;
     return result.filePaths[0];

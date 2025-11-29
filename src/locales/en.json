@@ -1,0 +1,111 @@
+{
+  "app": {
+    "localeforge": "LocaleForge",
+    "workspace": "Workspace",
+    "configure_what_to_scan_and_where_ic2c": "Configure what to scan and where translations live.",
+    "candidates": "Candidates",
+    "detected_strings": "Detected strings",
+    "bulk_actions": "Bulk actions",
+    "select_all": "Select all",
+    "deselect_all": "Deselect all",
+    "regenerate_keys": "Regenerate keys",
+    "apply_selected_to_base": "Apply selected to base",
+    "save_language_file": "Save language file",
+    "we_found_the_following_json_files_am41": "We found the following JSON files inside",
+    "cancel": "Cancel",
+    "use_file": "Use file",
+    "no_language_files_were_found_in": "No language files were found in",
+    "language": "Language",
+    "custom_code": "Custom code…",
+    "custom_locale_code": "Custom locale code",
+    "create_file": "Create file"
+  },
+  "candidate_table": {
+    "text": "Text",
+    "file": "File",
+    "suggested_key": "Suggested key",
+    "include": "Include",
+    "line": "Line",
+    "no_matches_yet_run_a_scan_60l6": "No matches yet. Run a scan to see candidates.",
+    "actions": "Actions",
+    "patched": "Patched"
+  },
+  "language_preview": {
+    "base_language": "Base language",
+    "reveal_in_finder": "Reveal in Finder"
+  },
+  "top_bar": {
+    "localeforge": "LocaleForge",
+    "extract_ui_strings_craft_translation_keys": "Extract UI strings & craft translation keys"
+  },
+  "workspace_controls": {
+    "workspace": "Workspace",
+    "scan_settings": "Scan settings",
+    "run_scan": "Run scan",
+    "save_base_file": "Save base file"
+  },
+  "candidate_file_view": {
+    "no_matches_yet_run_a_scan_60l6": "No matches yet. Run a scan to see candidates.",
+    "string": "string",
+    "line": "Line"
+  },
+  "candidate_views": {
+    "review_and_tweak_detected_strings": "Review and tweak detected strings",
+    "hidden": "hidden"
+  },
+  "folder_selector_modal": {
+    "nodemodules": "node_modules",
+    "dist": "dist",
+    "etc": ", etc.",
+    "select_recommended": "Select recommended",
+    "select_none": "Select none",
+    "select_all_loaded": "Select all loaded",
+    "loading_folders": "Loading folders…",
+    "cancel": "Cancel",
+    "apply_selection": "Apply selection"
+  },
+  "translation_progress_modal": {
+    "waiting_for_updates": "Waiting for updates…"
+  },
+  "translation_settings_modal": {
+    "autotranslation": "Auto-translation",
+    "bring_your_own_api_key_to_5ogn": "Bring your own API key to enable automatic translations.",
+    "provider": "Provider",
+    "api_key": "API key",
+    "model": "Model",
+    "loading_models": "Loading models…",
+    "target_locales": "Target locales",
+    "specify_which_locale_files_should_be_cta0": "Specify which locale files should be synced (e.g.,",
+    "es": "es",
+    "frca": "fr-CA",
+    "no_locales_added_yet": "No locales added yet",
+    "add": "Add"
+  },
+  "workspace_header": {
+    "active_project": "Active project",
+    "choose_folders_to_scan": "Choose folders to scan",
+    "run_scan": "Run scan",
+    "save_base_file": "Save base file",
+    "settings": "Settings",
+    "locale": "Locale",
+    "status": "Status",
+    "translated_keys": "Translated keys",
+    "updated": "Updated",
+    "up_to_date": "Up to date",
+    "error": "Error"
+  },
+  "translation_ready_modal": {
+    "source_string": "Source string",
+    "line": "· line",
+    "translation_key": "Translation key",
+    "function_call": "Function call",
+    "import": "Import",
+    "skip_import_function_is_global": "Skip import (function is global)",
+    "module": "Module",
+    "import_kind": "Import kind",
+    "named_import": "Named import (",
+    "default_import": "Default import",
+    "preview": "Preview",
+    "cancel": "Cancel"
+  }
+}

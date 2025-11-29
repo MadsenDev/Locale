@@ -6,6 +6,8 @@ import traverse from '@babel/traverse';
 import crypto from 'crypto';
 
 const LOCALIZED_FUNCTIONS = new Set(['t', 'translate', 'formatMessage', 'intl.formatMessage']);
+const PUNCTUATION_ONLY = /^[\s.:;,!?'"`~@#$%^&*(){}\[\]<>\-_=+/\\|]+$/;
+const EMOJI_ONLY = /^[\p{Emoji}\p{Extended_Pictographic}\p{Emoji_Presentation}\p{Emoji_Modifier_Base}\p{Emoji_Component}]+$/u;
 
 export type CandidateString = {
   id: string;
@@ -61,7 +63,7 @@ export async function scanProject(
     traverse(ast, {
       JSXText(pathNode) {
         const value = pathNode.node.value.trim();
-        if (!value || /[\n\t]/.test(value)) return;
+        if (!value || /[\n\t]/.test(value) || shouldSkipText(value)) return;
         recordCandidate(value, relPath, pathNode.node.loc, raw, false);
       },
       CallExpression(pathNode) {
@@ -75,7 +77,16 @@ export async function scanProject(
 
   return results;
 
-  function recordCandidate(
+      function shouldSkipText(value: string) {
+        const trimmed = value.trim();
+        if (!trimmed) return true;
+        if (trimmed.length <= 3 && !/[a-zA-Z0-9]/.test(trimmed)) return true;
+        if (PUNCTUATION_ONLY.test(trimmed)) return true;
+        if (EMOJI_ONLY.test(trimmed)) return true;
+        return false;
+      }
+
+      function recordCandidate(
     text: string,
     file: string,
     loc: { start: { line: number; column: number } } | null | undefined,
@@ -86,23 +97,23 @@ export async function scanProject(
     const value = text.trim();
     if (!value) return;
 
-    const start = loc?.start ?? { line: 0, column: 0 };
+        const start = loc?.start ?? { line: 0, column: 0 };
     const context = source.split('\n')[start.line - 1]?.trim() ?? '';
-    const hash = crypto
-      .createHash('md5')
+        const hash = crypto
+          .createHash('md5')
       .update(`${value}-${file}-${start.line}-${start.column}-${localized ? 'localized' : 'plain'}`)
-      .digest('hex');
+          .digest('hex');
 
-    results.push({
-      id: hash,
-      text: value,
+        results.push({
+          id: hash,
+          text: value,
       file,
-      line: start.line,
-      column: start.column,
-      context,
+          line: start.line,
+          column: start.column,
+          context,
       localized,
       keyPath,
-    });
+        });
   }
 }
 

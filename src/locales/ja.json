@@ -1,0 +1,95 @@
+{
+  "app": {
+    "localeforge": "LocaleForge",
+    "workspace": "ワークスペース",
+    "configure_what_to_scan_and_where_ic2c": "スキャン対象と翻訳の保存場所を設定します。",
+    "candidates": "候補",
+    "detected_strings": "検出された文字列",
+    "bulk_actions": "一括操作",
+    "select_all": "すべて選択",
+    "deselect_all": "すべて選択解除",
+    "regenerate_keys": "キーを再生成",
+    "apply_selected_to_base": "選択項目をベースに反映",
+    "save_language_file": "言語ファイルを保存",
+    "we_found_the_following_json_files_am41": "内に次のJSONファイルが見つかりました",
+    "cancel": "キャンセル",
+    "use_file": "ファイルを使用",
+    "no_language_files_were_found_in": "内に言語ファイルは見つかりませんでした",
+    "language": "言語",
+    "custom_code": "カスタムコード…",
+    "custom_locale_code": "カスタムロケールコード",
+    "create_file": "ファイルを作成"
+  },
+  "candidate_table": {
+    "text": "テキスト",
+    "file": "ファイル",
+    "suggested_key": "推奨キー",
+    "include": "含める",
+    "line": "行",
+    "no_matches_yet_run_a_scan_60l6": "一致はまだありません。スキャンを実行して候補を確認してください。"
+  },
+  "language_preview": {
+    "base_language": "ベース言語",
+    "reveal_in_finder": "Finderで表示"
+  },
+  "top_bar": {
+    "localeforge": "LocaleForge",
+    "extract_ui_strings_craft_translation_keys": "UI文字列を抽出して翻訳キーを作成"
+  },
+  "workspace_controls": {
+    "workspace": "ワークスペース",
+    "scan_settings": "スキャン設定",
+    "run_scan": "スキャンを実行",
+    "save_base_file": "ベースファイルを保存"
+  },
+  "candidate_file_view": {
+    "no_matches_yet_run_a_scan_60l6": "一致はまだありません。スキャンを実行して候補を確認してください。",
+    "string": "文字列",
+    "line": "行"
+  },
+  "candidate_views": {
+    "review_and_tweak_detected_strings": "検出された文字列を確認して微調整",
+    "hidden": "非表示"
+  },
+  "folder_selector_modal": {
+    "nodemodules": "node_modules",
+    "dist": "dist",
+    "etc": "、など",
+    "select_recommended": "推奨項目を選択",
+    "select_none": "すべて選択解除",
+    "select_all_loaded": "読み込み済みをすべて選択",
+    "loading_folders": "フォルダーを読み込み中…",
+    "cancel": "キャンセル",
+    "apply_selection": "選択を適用"
+  },
+  "translation_progress_modal": {
+    "waiting_for_updates": "更新を待機中…"
+  },
+  "translation_settings_modal": {
+    "autotranslation": "自動翻訳",
+    "bring_your_own_api_key_to_5ogn": "自前のAPIキーを使用すると自動翻訳を有効にできます。",
+    "provider": "プロバイダー",
+    "api_key": "APIキー",
+    "model": "モデル",
+    "loading_models": "モデルを読み込み中…",
+    "target_locales": "対象ロケール",
+    "specify_which_locale_files_should_be_cta0": "同期するロケールファイルを指定します（例：",
+    "es": "es",
+    "frca": "fr-CA",
+    "no_locales_added_yet": "ロケールはまだ追加されていません",
+    "add": "追加"
+  },
+  "workspace_header": {
+    "active_project": "アクティブなプロジェクト",
+    "choose_folders_to_scan": "スキャンするフォルダーを選択",
+    "run_scan": "スキャンを実行",
+    "save_base_file": "ベースファイルを保存",
+    "settings": "設定",
+    "locale": "ロケール",
+    "status": "ステータス",
+    "translated_keys": "翻訳済みのキー",
+    "updated": "更新済み",
+    "up_to_date": "最新の状態",
+    "error": "エラー"
+  }
+}

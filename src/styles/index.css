@@ -11,6 +11,15 @@ body {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
+.drag {
+  -webkit-app-region: drag;
+  cursor: default;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
 input, button {
   font-family: inherit;
 }

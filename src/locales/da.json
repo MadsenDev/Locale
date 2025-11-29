@@ -1,0 +1,95 @@
+{
+  "app": {
+    "localeforge": "LocaleForge",
+    "workspace": "Arbejdsområde",
+    "configure_what_to_scan_and_where_ic2c": "Konfigurer, hvad der skal scannes, og hvor oversættelserne ligger.",
+    "candidates": "Kandidater",
+    "detected_strings": "Fundne strenge",
+    "bulk_actions": "Massehandlinger",
+    "select_all": "Vælg alle",
+    "deselect_all": "Fravælg alle",
+    "regenerate_keys": "Generer nøgler igen",
+    "apply_selected_to_base": "Anvend de valgte på basisfilen",
+    "save_language_file": "Gem sprogfil",
+    "we_found_the_following_json_files_am41": "Vi fandt følgende JSON-filer i",
+    "cancel": "Annuller",
+    "use_file": "Brug fil",
+    "no_language_files_were_found_in": "Der blev ikke fundet sprogfiler i",
+    "language": "Sprog",
+    "custom_code": "Brugerdefineret kode…",
+    "custom_locale_code": "Brugerdefineret landestandardkode",
+    "create_file": "Opret fil"
+  },
+  "candidate_table": {
+    "text": "Tekst",
+    "file": "Fil",
+    "suggested_key": "Foreslået nøgle",
+    "include": "Medtag",
+    "line": "Linje",
+    "no_matches_yet_run_a_scan_60l6": "Ingen træffere endnu. Kør en scanning for at se kandidater."
+  },
+  "language_preview": {
+    "base_language": "Kildesprog",
+    "reveal_in_finder": "Vis i Finder"
+  },
+  "top_bar": {
+    "localeforge": "LocaleForge",
+    "extract_ui_strings_craft_translation_keys": "Uddrag UI-strenge og opret oversættelsesnøgler"
+  },
+  "workspace_controls": {
+    "workspace": "Arbejdsområde",
+    "scan_settings": "Scanningsindstillinger",
+    "run_scan": "Kør scanning",
+    "save_base_file": "Gem basisfil"
+  },
+  "candidate_file_view": {
+    "no_matches_yet_run_a_scan_60l6": "Ingen træffere endnu. Kør en scanning for at se kandidater.",
+    "string": "streng",
+    "line": "Linje"
+  },
+  "candidate_views": {
+    "review_and_tweak_detected_strings": "Gennemse og finjuster fundne strenge",
+    "hidden": "skjult"
+  },
+  "folder_selector_modal": {
+    "nodemodules": "node_modules",
+    "dist": "dist",
+    "etc": ", osv.",
+    "select_recommended": "Vælg anbefalede",
+    "select_none": "Vælg ingen",
+    "select_all_loaded": "Vælg alle indlæste",
+    "loading_folders": "Indlæser mapper…",
+    "cancel": "Annuller",
+    "apply_selection": "Anvend markering"
+  },
+  "translation_progress_modal": {
+    "waiting_for_updates": "Venter på opdateringer…"
+  },
+  "translation_settings_modal": {
+    "autotranslation": "Automatisk oversættelse",
+    "bring_your_own_api_key_to_5ogn": "Brug din egen API-nøgle for at aktivere automatiske oversættelser.",
+    "provider": "Udbyder",
+    "api_key": "API-nøgle",
+    "model": "Model",
+    "loading_models": "Indlæser modeller…",
+    "target_locales": "Målsprog",
+    "specify_which_locale_files_should_be_cta0": "Angiv hvilke locale-filer der skal synkroniseres (f.eks.,",
+    "es": "es",
+    "frca": "fr-CA",
+    "no_locales_added_yet": "Ingen locales tilføjet endnu",
+    "add": "Tilføj"
+  },
+  "workspace_header": {
+    "active_project": "Aktivt projekt",
+    "choose_folders_to_scan": "Vælg mapper, der skal scannes",
+    "run_scan": "Kør scanning",
+    "save_base_file": "Gem basisfil",
+    "settings": "Indstillinger",
+    "locale": "Landestandard",
+    "status": "Status",
+    "translated_keys": "Oversatte nøgler",
+    "updated": "Opdateret",
+    "up_to_date": "Ajourført",
+    "error": "Fejl"
+  }
+}

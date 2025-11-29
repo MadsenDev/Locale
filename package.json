@@ -20,9 +20,10 @@
     "dist": "npm run build && electron-builder"
   },
   "dependencies": {
+    "@babel/generator": "^7.28.5",
     "@babel/parser": "^7.24.7",
     "@babel/traverse": "^7.24.7",
-    "electron": "^29.3.0",
+    "@babel/types": "^7.28.5",
     "fast-glob": "^3.3.2",
     "framer-motion": "^11.2.6",
     "lodash": "^4.17.21",
@@ -43,6 +44,7 @@
     "autoprefixer": "^10.4.19",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
+    "electron": "^29.3.0",
     "electron-builder": "^24.13.3",
     "jsdom": "^27.2.0",
     "postcss": "^8.4.38",

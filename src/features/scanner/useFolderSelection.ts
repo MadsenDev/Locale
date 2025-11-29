@@ -15,9 +15,13 @@ export function useFolderSelection(projectPath: string) {
   const [error, setError] = useState('');
 
   const selectionRef = useRef(selection);
+  const treeDataRef = useRef(treeData);
   useEffect(() => {
     selectionRef.current = selection;
   }, [selection]);
+  useEffect(() => {
+    treeDataRef.current = treeData;
+  }, [treeData]);
 
   const listFolders = ipc.listProjectFolders;
 
@@ -26,8 +30,9 @@ export function useFolderSelection(projectPath: string) {
       const root = customRoot ?? projectPath;
       if (!root || !listFolders) return [];
       const key = relativePath ?? ROOT_NODE_KEY;
-      if (!force && treeData[key]) {
-        return treeData[key];
+      const cached = treeDataRef.current[key];
+      if (!force && cached) {
+        return cached;
       }
 
       setLoading(true);
@@ -38,7 +43,11 @@ export function useFolderSelection(projectPath: string) {
           path: relativePath ?? undefined,
         });
         const children = (response?.children ?? []).sort((a, b) => a.name.localeCompare(b.name));
-        setTreeData((prev) => ({ ...prev, [key]: children }));
+        setTreeData((prev) => {
+          const next = { ...prev, [key]: children };
+          treeDataRef.current = next;
+          return next;
+        });
 
         if (key === ROOT_NODE_KEY && selectionRef.current.length === 0 && children.length > 0) {
           const recommended = children
@@ -58,11 +67,14 @@ export function useFolderSelection(projectPath: string) {
         setLoading(false);
       }
     },
-    [listFolders, projectPath, treeData]
+    [listFolders, projectPath]
   );
 
   useEffect(() => {
-    setTreeData({});
+    setTreeData(() => {
+      treeDataRef.current = {};
+      return {};
+    });
     setSelection([]);
     setIncludedDirs([]);
     setExpanded(new Set([ROOT_NODE_KEY]));
@@ -75,12 +87,12 @@ export function useFolderSelection(projectPath: string) {
     async (rootOverride?: string) => {
       const activeRoot = rootOverride ?? projectPath;
       if (!activeRoot) return;
-      if (!treeData[ROOT_NODE_KEY] || rootOverride) {
+      if (!treeDataRef.current[ROOT_NODE_KEY] || rootOverride) {
         await loadChildren(null, activeRoot, true);
       }
       setModalOpen(true);
     },
-    [projectPath, treeData, loadChildren]
+    [projectPath, loadChildren]
   );
 
   const closeModal = useCallback(() => {

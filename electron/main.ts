@@ -3,9 +3,22 @@ import path from 'path';
 import { registerProjectHandlers } from './ipc/projectHandlers';
 import { registerLanguageHandlers } from './ipc/languageHandlers';
 import { registerTranslationHandlers } from './ipc/translationHandlers';
+import { registerCodeModHandlers } from './ipc/codeModHandlers';
+
+type LaunchContext = {
+  projectPath?: string;
+};
+
+const launchContext: LaunchContext = {};
+const initialProjectArg = app.commandLine.getSwitchValue('project');
+if (initialProjectArg) {
+  launchContext.projectPath = path.resolve(initialProjectArg);
+}
 
 const isDev = !app.isPackaged;
 let mainWindow: BrowserWindow | null = null;
+
+const isMac = process.platform === 'darwin';
 
 async function createWindow() {
   const preloadPath = path.join(__dirname, 'preload.js');
@@ -13,13 +26,27 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
-    backgroundColor: '#0f172a',
+    minWidth: 960,
+    minHeight: 640,
+    backgroundColor: '#020617',
+    frame: false,
+    titleBarStyle: isMac ? 'hiddenInset' : 'hidden',
+    trafficLightPosition: isMac ? { x: 16, y: 16 } : undefined,
+    titleBarOverlay: !isMac
+      ? {
+          color: '#020617',
+          symbolColor: '#f8fafc',
+          height: 40,
+        }
+      : undefined,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: preloadPath,
       contextIsolation: true,
       nodeIntegration: false,
     },
   });
+  win.setMenuBarVisibility(false);
 
   mainWindow = win;
 
@@ -38,6 +65,7 @@ app.whenReady().then(() => {
   registerProjectHandlers();
   registerLanguageHandlers();
   registerTranslationHandlers(() => mainWindow, () => app.getPath('userData'));
+  registerCodeModHandlers();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -62,4 +90,23 @@ app.on('browser-window-created', (_, window) => {
 
 ipcMain.handle('os:reveal', (_event, targetPath: string) => {
   shell.showItemInFolder(targetPath);
+});
+
+ipcMain.handle('launch:get-context', () => launchContext);
+
+ipcMain.handle('window:minimize', () => {
+  mainWindow?.minimize();
+});
+
+ipcMain.handle('window:maximize', () => {
+  if (!mainWindow) return;
+  if (mainWindow.isMaximized()) {
+    mainWindow.restore();
+  } else {
+    mainWindow.maximize();
+  }
+});
+
+ipcMain.handle('window:close', () => {
+  mainWindow?.close();
 });

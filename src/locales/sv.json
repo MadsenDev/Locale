@@ -1,0 +1,95 @@
+{
+  "app": {
+    "localeforge": "LocaleForge",
+    "workspace": "Arbetsyta",
+    "configure_what_to_scan_and_where_ic2c": "Konfigurera vad som ska genomsökas och var översättningarna finns.",
+    "candidates": "Kandidater",
+    "detected_strings": "Upptäckta strängar",
+    "bulk_actions": "Massåtgärder",
+    "select_all": "Markera alla",
+    "deselect_all": "Avmarkera alla",
+    "regenerate_keys": "Skapa om nycklar",
+    "apply_selected_to_base": "Tillämpa valda på basen",
+    "save_language_file": "Spara språkfil",
+    "we_found_the_following_json_files_am41": "Vi hittade följande JSON-filer i",
+    "cancel": "Avbryt",
+    "use_file": "Använd fil",
+    "no_language_files_were_found_in": "Inga språkfiler hittades i",
+    "language": "Språk",
+    "custom_code": "Anpassad kod…",
+    "custom_locale_code": "Anpassad språk- och regionkod",
+    "create_file": "Skapa fil"
+  },
+  "candidate_table": {
+    "text": "Text",
+    "file": "Arkiv",
+    "suggested_key": "Föreslagen nyckel",
+    "include": "Inkludera",
+    "line": "Rad",
+    "no_matches_yet_run_a_scan_60l6": "Inga träffar ännu. Kör en skanning för att se kandidater."
+  },
+  "language_preview": {
+    "base_language": "Källspråk",
+    "reveal_in_finder": "Visa i Finder"
+  },
+  "top_bar": {
+    "localeforge": "LocaleForge",
+    "extract_ui_strings_craft_translation_keys": "Extrahera UI-strängar och skapa översättningsnycklar"
+  },
+  "workspace_controls": {
+    "workspace": "Arbetsyta",
+    "scan_settings": "Skanningsinställningar",
+    "run_scan": "Kör skanning",
+    "save_base_file": "Spara basfil"
+  },
+  "candidate_file_view": {
+    "no_matches_yet_run_a_scan_60l6": "Inga träffar ännu. Kör en skanning för att se kandidater.",
+    "string": "sträng",
+    "line": "Rad"
+  },
+  "candidate_views": {
+    "review_and_tweak_detected_strings": "Granska och finjustera upptäckta strängar",
+    "hidden": "dold"
+  },
+  "folder_selector_modal": {
+    "nodemodules": "node_modules",
+    "dist": "dist",
+    "etc": ", m.m.",
+    "select_recommended": "Välj rekommenderade",
+    "select_none": "Välj inga",
+    "select_all_loaded": "Välj alla inlästa",
+    "loading_folders": "Läser in mappar…",
+    "cancel": "Avbryt",
+    "apply_selection": "Använd markering"
+  },
+  "translation_progress_modal": {
+    "waiting_for_updates": "Väntar på uppdateringar…"
+  },
+  "translation_settings_modal": {
+    "autotranslation": "Automatisk översättning",
+    "bring_your_own_api_key_to_5ogn": "Använd din egen API-nyckel för att aktivera automatiska översättningar.",
+    "provider": "Leverantör",
+    "api_key": "API-nyckel",
+    "model": "Modell",
+    "loading_models": "Läser in modeller…",
+    "target_locales": "Målspråk och regioner",
+    "specify_which_locale_files_should_be_cta0": "Ange vilka språkfiler som ska synkroniseras (t.ex.,",
+    "es": "es",
+    "frca": "fr-CA",
+    "no_locales_added_yet": "Inga språk eller regioner har lagts till ännu",
+    "add": "Lägg till"
+  },
+  "workspace_header": {
+    "active_project": "Aktivt projekt",
+    "choose_folders_to_scan": "Välj mappar att genomsöka",
+    "run_scan": "Kör genomsökning",
+    "save_base_file": "Spara basfil",
+    "settings": "Inställningar",
+    "locale": "Språkvariant",
+    "status": "Status",
+    "translated_keys": "Översatta nycklar",
+    "updated": "Uppdaterad",
+    "up_to_date": "Aktuell",
+    "error": "Fel"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "locale-forge",
+  "name": "LocaleForge",
+  "version": "0.1.0",
+  "description": "Scan UI strings, manage language workspaces, and auto-sync translations.",
+  "icon": "icon.png",
+  "type": "externalApp",
+  "capabilities": ["launcher"],
+  "launch": {
+    "requiredContext": ["projectPath"],
+    "targets": {
+      "win32": {
+        "path": ".\\\\bin\\\\LocaleForge.exe",
+        "args": ["--project={projectPath}"]
+      },
+      "darwin": {
+        "path": "./bin/LocaleForge.app/Contents/MacOS/LocaleForge",
+        "args": ["--project={projectPath}"]
+      },
+      "linux": {
+        "path": "./bin/LocaleForge",
+        "args": ["--project={projectPath}"]
+      }
+    },
+    "projectAction": {
+      "label": "Open in LocaleForge",
+      "description": "Launch LocaleForge for the selected project."
+    }
+  }
+}
+

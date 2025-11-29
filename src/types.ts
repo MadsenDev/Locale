@@ -7,6 +7,8 @@ export type CandidateString = {
   context: string;
   keySuggestion?: string;
   include?: boolean;
+  localized?: boolean;
+  keyPath?: string;
 };
 
 export type LanguageEntry = {

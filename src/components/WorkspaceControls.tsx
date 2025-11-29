@@ -45,7 +45,7 @@ export function WorkspaceControls({
           label="Project root"
           description={projectPath || 'Select a folder to scan'}
           icon={<FiFolder className="h-5 w-5" />}
-          onClick={onChooseProject}
+            onClick={onChooseProject}
         />
         <SidebarButton
           label="Language workspace"
@@ -58,45 +58,45 @@ export function WorkspaceControls({
           description={languagePath || 'Pick or create your base locale'}
           icon={<FiFileText className="h-5 w-5" />}
           disabled={!languageDir}
-          onClick={onChooseLanguage}
+            onClick={onChooseLanguage}
         />
-      </div>
+            </div>
 
       <div className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Scan settings</p>
         <SidebarField
           label="Extensions"
-          value={extensionInput}
+                value={extensionInput}
           onChange={onExtensionChange}
-          placeholder=".js,.jsx,.ts,.tsx"
+                placeholder=".js,.jsx,.ts,.tsx"
           helper="Comma-separated file extensions to inspect."
         />
         <SidebarField
           label="Ignore patterns"
-          value={ignoreInput}
+                value={ignoreInput}
           onChange={onIgnoreChange}
-          placeholder="node_modules,dist,.git"
+                placeholder="node_modules,dist,.git"
           helper="Directories or globs that should be skipped."
-        />
-      </div>
+              />
+        </div>
 
       <div className="mt-auto flex flex-col gap-2">
-        <button
-          onClick={onScan}
-          disabled={disabled}
+          <button
+            onClick={onScan}
+            disabled={disabled}
           className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 text-sm font-semibold text-emerald-950 shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <FiRefreshCcw className="h-4 w-4" />
+          >
+            <FiRefreshCcw className="h-4 w-4" />
           Run scan
-        </button>
-        <button
-          onClick={onSave}
-          disabled={!languagePath || disabled}
+          </button>
+          <button
+            onClick={onSave}
+            disabled={!languagePath || disabled}
           className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 bg-slate-800/60 px-4 py-3 text-sm font-semibold text-white transition hover:border-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <FiDownload className="h-4 w-4" />
+          >
+            <FiDownload className="h-4 w-4" />
           Save base file
-        </button>
+          </button>
       </div>
     </motion.section>
   );

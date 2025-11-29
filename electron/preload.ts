@@ -1,12 +1,12 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import type { LocaleForgeAPI } from './preload.d';
+import type { LocaleForgeAPI, TranslationProgressEvent } from './preload.d';
 
 const api: LocaleForgeAPI = {
   async openProject() {
     return ipcRenderer.invoke('project:select');
   },
-  async openLanguageDirectory() {
-    return ipcRenderer.invoke('lang:select-dir');
+  async openLanguageDirectory(defaultPath?: string) {
+    return ipcRenderer.invoke('lang:select-dir', defaultPath ? { defaultPath } : undefined);
   },
   async listProjectFolders(payload) {
     return ipcRenderer.invoke('project:list-folders', payload);
@@ -25,6 +25,15 @@ const api: LocaleForgeAPI = {
   },
   async scanProject(params) {
     return ipcRenderer.invoke('project:scan', params);
+  },
+  async applyTranslationPatch(payload) {
+    return ipcRenderer.invoke('codemod:wrap-translation', payload);
+  },
+  async checkDependency(payload) {
+    return ipcRenderer.invoke('codemod:check-dependency', payload);
+  },
+  async installDependency(payload) {
+    return ipcRenderer.invoke('codemod:install-dependency', payload);
   },
   async loadLanguageFile(path) {
     return ipcRenderer.invoke('lang:load', { path });
@@ -48,11 +57,25 @@ const api: LocaleForgeAPI = {
     return ipcRenderer.invoke('translation:models:list', payload);
   },
   onTranslationProgress(callback) {
-    const listener = (_event, data) => callback(data);
+    const listener = (_event: Electron.IpcRendererEvent, data: TranslationProgressEvent) => callback(data);
     ipcRenderer.on('translation:progress', listener);
     return () => {
       ipcRenderer.removeListener('translation:progress', listener);
     };
+  },
+  async getLaunchContext() {
+    return ipcRenderer.invoke('launch:get-context');
+  },
+  window: {
+    minimize() {
+      return ipcRenderer.invoke('window:minimize');
+    },
+    maximize() {
+      return ipcRenderer.invoke('window:maximize');
+    },
+    close() {
+      return ipcRenderer.invoke('window:close');
+    },
   },
 };
 

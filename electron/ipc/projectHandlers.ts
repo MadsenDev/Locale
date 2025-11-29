@@ -1,6 +1,7 @@
 import { dialog, ipcMain } from 'electron';
 import path from 'path';
 import fs from 'fs/promises';
+import { Dirent } from 'fs';
 import { scanProject } from '../scanner';
 import { DEFAULT_FOLDER_IGNORES, directoryHasChildDirectories } from '../utils/fsHelpers';
 
@@ -10,7 +11,7 @@ type DirectoryNode = {
   hasChildren: boolean;
 };
 
-async function isDirectoryEntry(targetPath: string, entry: fs.Dirent) {
+async function isDirectoryEntry(targetPath: string, entry: Dirent) {
   if (entry.isDirectory()) return true;
   if (entry.isSymbolicLink()) {
     try {
