@@ -12,7 +12,7 @@ export function TopBar({ onOpenSettings }: Props) {
           <FiFolder className="h-6 w-6" />
         </div>
         <div>
-          <p className="text-lg font-semibold">LocaleForge</p>
+          <p className="text-lg font-semibold">Locroot</p>
           <p className="text-xs text-slate-400">Extract UI strings & craft translation keys</p>
         </div>
       </div>

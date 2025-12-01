@@ -1,4 +1,4 @@
-Build a desktop app called "LocaleForge" using:
+Build a desktop app called "Locroot" using:
 
 - Vite + React + TypeScript
 - Electron (main + renderer)
@@ -10,7 +10,7 @@ The app helps developers extract UI strings from a codebase and generate or upda
 
 ## High-level idea
 
-LocaleForge is an Electron desktop app where the user:
+Locroot is an Electron desktop app where the user:
 
 1. Selects a project root folder.
 2. Selects or creates a base language JSON file (e.g. `locales/en.json`).

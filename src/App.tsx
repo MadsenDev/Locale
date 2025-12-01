@@ -44,6 +44,9 @@ const DEFAULT_CODEMOD_CONFIG: TranslationReadyConfig = {
 
 const I18N_PATTERN = /i18n/i;
 
+const CODEMOD_STORAGE_KEY = 'locroot.codemod';
+const LEGACY_CODEMOD_STORAGE_KEY = 'localeforge.codemod';
+
 function packageFromImportSource(specifier: string) {
   const trimmed = specifier.trim();
   if (!trimmed) return null;
@@ -143,7 +146,9 @@ export default function App() {
       return DEFAULT_CODEMOD_CONFIG;
     }
     try {
-      const raw = window.localStorage.getItem('localeforge.codemod');
+      const raw =
+        window.localStorage.getItem(CODEMOD_STORAGE_KEY) ??
+        window.localStorage.getItem(LEGACY_CODEMOD_STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
         return { ...DEFAULT_CODEMOD_CONFIG, ...parsed };
@@ -164,7 +169,8 @@ export default function App() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     try {
-      window.localStorage.setItem('localeforge.codemod', JSON.stringify(codeModConfig));
+      window.localStorage.setItem(CODEMOD_STORAGE_KEY, JSON.stringify(codeModConfig));
+      window.localStorage.removeItem(LEGACY_CODEMOD_STORAGE_KEY);
     } catch {
       // ignore persistence errors
     }
@@ -539,7 +545,7 @@ export default function App() {
       <div className="flex flex-1 overflow-hidden">
         <aside className="hidden w-80 flex-shrink-0 flex-col border-r border-slate-900/80 bg-slate-950/90 px-5 py-6 lg:flex">
         <div className="mb-6">
-          <p className="text-xs uppercase tracking-[0.4em] text-slate-500">LocaleForge</p>
+          <p className="text-xs uppercase tracking-[0.4em] text-slate-500">Locroot</p>
           <h1 className="mt-2 text-2xl font-semibold text-white">Workspace</h1>
           <p className="text-sm text-slate-400">Configure what to scan and where translations live.</p>
         </div>

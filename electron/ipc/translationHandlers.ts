@@ -47,13 +47,18 @@ type TranslationProgressEvent = {
   error?: string;
 };
 
-let resolveSettingsPath: () => string = () => path.join(process.cwd(), 'localeforge-settings.json');
+const SETTINGS_FILE = 'locroot-settings.json';
+const LEGACY_SETTINGS_FILE = 'localeforge-settings.json';
+
+let resolveSettingsPath: () => string = () => path.join(process.cwd(), SETTINGS_FILE);
+let resolveLegacySettingsPath: () => string = () => path.join(process.cwd(), LEGACY_SETTINGS_FILE);
 
 export function registerTranslationHandlers(
   getMainWindow: () => BrowserWindow | null,
   getUserDataPath: () => string
 ) {
-  resolveSettingsPath = () => path.join(getUserDataPath(), 'localeforge-settings.json');
+  resolveSettingsPath = () => path.join(getUserDataPath(), SETTINGS_FILE);
+  resolveLegacySettingsPath = () => path.join(getUserDataPath(), LEGACY_SETTINGS_FILE);
 
   ipcMain.handle('translation:settings:get', async () => {
     const data = await readSettings();
@@ -136,12 +141,23 @@ function getSettingsPath() {
   return resolveSettingsPath();
 }
 
+function getLegacySettingsPath() {
+  return resolveLegacySettingsPath();
+}
+
 async function readSettings(): Promise<AppSettings> {
   try {
     const raw = await fs.readFile(getSettingsPath(), 'utf8');
     return JSON.parse(raw);
   } catch {
-    return {};
+    try {
+      const legacyRaw = await fs.readFile(getLegacySettingsPath(), 'utf8');
+      const parsed = JSON.parse(legacyRaw);
+      await writeSettings(parsed);
+      return parsed;
+    } catch {
+      return {};
+    }
   }
 }
 

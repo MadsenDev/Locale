@@ -4,7 +4,7 @@ type TitlebarProps = {
   title?: string;
 };
 
-export function Titlebar({ title = 'LocaleForge' }: TitlebarProps) {
+export function Titlebar({ title = 'Locroot' }: TitlebarProps) {
   const controls = window.api?.window;
 
   const handleMinimize = () => controls?.minimize?.();

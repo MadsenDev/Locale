@@ -1,6 +1,6 @@
 {
   "app": {
-    "localeforge": "LocaleForge",
+    "localeforge": "Locroot",
     "workspace": "Workspace",
     "configure_what_to_scan_and_where_ic2c": "Configure what to scan and where translations live.",
     "candidates": "Candidates",
@@ -35,7 +35,7 @@
     "reveal_in_finder": "Reveal in Finder"
   },
   "top_bar": {
-    "localeforge": "LocaleForge",
+    "localeforge": "Locroot",
     "extract_ui_strings_craft_translation_keys": "Extract UI strings & craft translation keys"
   },
   "workspace_controls": {

@@ -1,4 +1,4 @@
-# LocaleForge TODO
+# Locroot TODO
 
 ## Gaps vs. PROJECT.md
 - Add application menu and/or system tray management in the Electron main process to align with the architecture requirements. 【F:PROJECT.md†L30-L35】

@@ -7,6 +7,7 @@
   "type": "externalApp",
   "capabilities": ["launcher"],
   "launch": {
+    "gallery": true,
     "requiredContext": ["projectPath"],
     "targets": {
       "win32": {
@@ -18,14 +19,17 @@
         "args": ["--project={projectPath}"]
       },
       "linux": {
-        "path": "./bin/Locroot",
+        "path": "./bin/Locroot-0.1.0.AppImage",
         "args": ["--project={projectPath}"]
       }
     },
-    "projectAction": {
-      "label": "Open in Locroot",
-      "description": "Launch Locroot for the selected project."
-    }
+    "projectActions": [
+      {
+        "id": "project-menu",
+        "label": "Open in Locroot",
+        "description": "Launch Locroot for the selected project.",
+        "requiredContext": ["projectPath"]
+      }
+    ]
   }
 }
-

@@ -1,6 +1,6 @@
 {
   "app": {
-    "localeforge": "LocaleForge",
+    "localeforge": "Locroot",
     "workspace": "Arbeitsbereich",
     "configure_what_to_scan_and_where_ic2c": "Konfigurieren Sie, was gescannt werden soll und wo die Übersetzungen gespeichert sind.",
     "candidates": "Kandidaten",
@@ -33,7 +33,7 @@
     "reveal_in_finder": "Im Finder anzeigen"
   },
   "top_bar": {
-    "localeforge": "LocaleForge",
+    "localeforge": "Locroot",
     "extract_ui_strings_craft_translation_keys": "UI-Zeichenketten extrahieren und Übersetzungsschlüssel erstellen"
   },
   "workspace_controls": {

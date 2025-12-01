@@ -1,5 +1,5 @@
 {
-  "name": "localeforge",
+  "name": "locroot",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -56,8 +56,8 @@
     "wait-on": "^7.2.0"
   },
   "build": {
-    "appId": "com.localeforge.app",
-    "productName": "LocaleForge",
+    "appId": "com.locroot.app",
+    "productName": "Locroot",
     "directories": {
       "output": "release"
     },

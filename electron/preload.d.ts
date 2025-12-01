@@ -1,4 +1,4 @@
-export interface LocaleForgeAPI {
+export interface LocrootAPI {
   openProject(): Promise<string | null>;
   openLanguageDirectory(defaultPath?: string): Promise<string | null>;
   listProjectFolders(payload: { root: string; path?: string }): Promise<{ children: DirectoryNode[] }>;
@@ -104,6 +104,6 @@ type DependencyPayload = {
 
 declare global {
   interface Window {
-    api: LocaleForgeAPI;
+    api: LocrootAPI;
   }
 }

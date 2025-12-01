@@ -1,6 +1,6 @@
 {
   "app": {
-    "localeforge": "LocaleForge",
+    "localeforge": "Locroot",
     "workspace": "ワークスペース",
     "configure_what_to_scan_and_where_ic2c": "スキャン対象と翻訳の保存場所を設定します。",
     "candidates": "候補",
@@ -33,7 +33,7 @@
     "reveal_in_finder": "Finderで表示"
   },
   "top_bar": {
-    "localeforge": "LocaleForge",
+    "localeforge": "Locroot",
     "extract_ui_strings_craft_translation_keys": "UI文字列を抽出して翻訳キーを作成"
   },
   "workspace_controls": {

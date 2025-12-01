@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import type { LocaleForgeAPI, TranslationProgressEvent } from './preload.d';
+import type { LocrootAPI, TranslationProgressEvent } from './preload.d';
 
-const api: LocaleForgeAPI = {
+const api: LocrootAPI = {
   async openProject() {
     return ipcRenderer.invoke('project:select');
   },
